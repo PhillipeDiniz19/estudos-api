@@ -1,4 +1,4 @@
 # Repositório voltado para amazenar estudos sobre API/REACT/HOOKS/CLASS
 
-- react components
+- React Components
 - UseState / UseEffect
