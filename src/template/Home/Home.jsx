@@ -1,43 +1,7 @@
-import { Component } from 'react';
-import './styles.css';
-
-class Home extends Component{
-  state = {
-    counter: 0,
-  }
-
-  handleClick = () => {
-    this.setState(
-      (prevState, prevProps) => {
-        return {counter: prevState.counter + 1}
-      },
-      () => {
-        console.log("Post", this.state.counter)
-      }
-    )
-  }
-
-render() {
-    return (
-      <div className='container'>
-        <h1>{this.state.counter}</h1>
-        <button onClick={this.handleClick}>Increment</button>
-      </div>
-    )
-  }
-}
-
-export default Home
-
-
-
-
-
-
-
-/*import { useCallback, useEffect, useState } from 'react';
 
 import './styles.css';
+import { useCallback, useEffect, useState } from 'react';
+
 
 import { Posts } from '../../components/Posts/posts';
 import { loadPosts } from '../../utils/loadPosts';
@@ -102,4 +66,4 @@ export const Home = () => {
   );
 };
 
-export default Home */
+export default Home 
