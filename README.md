@@ -2,4 +2,4 @@
 
 - React Components
 - UseState / UseEffect
-- JestJS
+- JestJS with Mock and Specs
