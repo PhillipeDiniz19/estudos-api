@@ -3,3 +3,4 @@
 - React Components
 - UseState / UseEffect
 - JestJS with Mock and Specs
+- Eslint, prettier, editorconfig e prop-types
