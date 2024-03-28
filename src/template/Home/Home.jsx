@@ -1,17 +1,17 @@
-import "./styles.css";
-import { useCallback, useEffect, useState } from "react";
+import './styles.css';
+import { useCallback, useEffect, useState } from 'react';
 
-import { Posts } from "../../components/Posts/posts";
-import { loadPosts } from "../../utils/loadPosts";
-import { Button } from "../../components/Button/Button";
-import { TextInput } from "../../components/textinput/index";
+import { Posts } from '../../components/Posts/posts';
+import { loadPosts } from '../../utils/loadPosts';
+import { Button } from '../../components/Button/Button';
+import { TextInput } from '../../components/textinput/index';
 
 export const Home = () => {
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
   const [postsPerPage] = useState(2);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   const handleLoadPosts = useCallback(async (page, postsPerPage) => {
     const postsAndPhotos = await loadPosts();
@@ -58,13 +58,7 @@ export const Home = () => {
       {filteredPosts.length === 0 && <p>Não existem posts =(</p>}
 
       <div className="button-container">
-        {!searchValue && (
-          <Button
-            text="Load more posts"
-            onClick={loadMorePosts}
-            disabled={noMorePosts}
-          />
-        )}
+        {!searchValue && <Button text="Load more posts" onClick={loadMorePosts} disabled={noMorePosts} />}
       </div>
     </section>
   );
