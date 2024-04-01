@@ -3,6 +3,7 @@ import { setupServer } from 'msw/node';
 
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { Home } from './Home';
+import userEvent from '@testing-library/user-event';
 
 const handlers = [
   rest.get('*jsonplaceholder.typicode.com*', async (req, res, ctx) => {
@@ -63,5 +64,32 @@ describe('<Home />', () => {
 
     const button = screen.getByRole('button', { name: /load more posts /i });
     expect(button).toBeInTheDocument();
+  });
+
+  it('should render posts', async () => {
+    render(<Home />);
+    const noMorePosts = screen.getByText('Não existem posts =(');
+
+    expect.assertions(10);
+
+    await waitForElementToBeRemoved(noMorePosts);
+
+    const search = screen.getByPlaceholderText(/Type your search/i);
+    expect(screen.getByRole('heading', { name: 'title1 1' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'title2 2' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'title3 3' })).toBeInTheDocument();
+
+    userEvent.type(search, 'title 1');
+    expect(screen.getByRole('heading', { name: 'title1 1' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'title2 2' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'title3 3' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Search value: title1' })).toBeInTheDocument();
+
+    userEvent.clear(search);
+    expect(screen.getByRole('heading', { name: 'title1 1' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'title2 2' })).toBeInTheDocument();
+
+    userEvent.type(search, 'post does not exist');
+    expect(screen.getByRole('Não existem posts =(')).toBeInTheDocument();
   });
 });
