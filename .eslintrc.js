@@ -1,4 +1,9 @@
 module.exports = {
+  semi: true,
+  trailingComma: 'all',
+  singleQuote: true,
+  printWidth: 120,
+  tabWidth: 2,
   env: {
     browser: true,
     es2021: true,
