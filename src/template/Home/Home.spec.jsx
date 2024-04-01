@@ -1,8 +1,8 @@
 import { rest } from 'msw';
-import { setupServer } from 'msq/node';
+import { setupServer } from 'msw/node';
 
-const { render, screen, waitForElementToBeRemoved } = require('@testing-library/react');
-import Home from './Home';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { Home } from './Home';
 
 const handlers = [
   rest.get('*jsonplaceholder.typicode.com*', async (req, res, ctx) => {
@@ -36,9 +36,18 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
-describe('<Home/>', () => {
-  // dentro do describe eu vou ter os teste do componente que é o componente home e pode trocar para outros components.
-  it('should render search, posts, and load more', async () => {
+describe('<Home />', () => {
+  beforeAll(() => {
+    server.listen();
+  });
+
+  afterEach(() => server.resetHandlers());
+
+  afterAll(() => {
+    server.close();
+  });
+
+  it('should render search, posts and load more', async () => {
     render(<Home />);
     const noMorePosts = screen.getByText('Não existem posts =(');
 
@@ -46,5 +55,3 @@ describe('<Home/>', () => {
     screen.debug();
   });
 });
-
-// Vamos usar "Home.spec.jsx" para teste unitarios ou seja teste de componentes unicos.

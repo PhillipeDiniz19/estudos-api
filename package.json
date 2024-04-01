@@ -42,5 +42,10 @@
     "eslint-plugin-react": "^7.34.1",
     "msw": "^2.2.13",
     "prettier": "^3.2.5"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!@bundled-es-modules)/"
+    ]
   }
 }
