@@ -49,6 +49,7 @@ describe('<Home />', () => {
   });
 
   it('should render search, posts and load more', async () => {
+    // Mostrar se tem elementos na tela como search, posts e button
     render(<Home />);
     const noMorePosts = screen.getByText('Não existem posts =(');
 
@@ -67,6 +68,7 @@ describe('<Home />', () => {
   });
 
   it('should render posts', async () => {
+    // verificar se tem o elemento posts na tela e title img
     render(<Home />);
     const noMorePosts = screen.getByText('Não existem posts =(');
 
@@ -91,5 +93,22 @@ describe('<Home />', () => {
 
     userEvent.type(search, 'post does not exist');
     expect(screen.getByRole('Não existem posts =(')).toBeInTheDocument();
+  });
+
+  it('should button load more posts', async () => {
+    // verificar se tem o elementor button no componente home
+    render(<Home />);
+    const noMorePosts = screen.getByText('Não existem posts =(');
+
+    expect.assertions(3);
+
+    await waitForElementToBeRemoved(noMorePosts);
+
+    const button = screen.getByRole('button', { name: /load more posts /i });
+
+    userEvent.click(button);
+    expect(button).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'title3 3' })).not.toBeInTheDocument();
+    expect(button).toBeDisabled();
   });
 });
