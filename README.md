@@ -5,3 +5,4 @@
 - JestJS with Mock and Specs
 - Eslint, prettier, editorconfig
 - prop-types
+- Coverage
